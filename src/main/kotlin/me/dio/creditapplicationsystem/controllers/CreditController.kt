@@ -1,5 +1,6 @@
 package me.dio.creditapplicationsystem.controllers
 
+import jakarta.validation.Valid
 import me.dio.creditapplicationsystem.dto.CreditDto
 import me.dio.creditapplicationsystem.dto.CreditView
 import me.dio.creditapplicationsystem.dto.CreditViewList
@@ -23,7 +24,7 @@ class CreditController(
     private val creditService: CreditService
 ) {
   @PostMapping
-  fun store(@RequestBody creditDto: CreditDto) : ResponseEntity<String> {
+  fun store(@RequestBody @Valid creditDto: CreditDto) : ResponseEntity<String> {
     val storedCredit: Credit = this.creditService.save(creditDto.toEntity())
     return ResponseEntity.status(HttpStatus.CREATED).body("Credit ${storedCredit.creditCode} saved successfully.")
   }
